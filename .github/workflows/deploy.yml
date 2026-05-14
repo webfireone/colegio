@@ -1,0 +1,81 @@
+name: Build and Deploy to Vercel + Render
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run production build
+        run: npm run build
+
+  deploy-vercel:
+    name: Deploy to Vercel
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+          working-directory: .
+
+  deploy-render:
+    name: Deploy to Render
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render deploy
+        id: render_deploy
+        run: |
+          set -e
+          response=$(curl -s -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"clearCache": false}')
+          echo "response=$response"
+          deploy_id=$(echo "$response" | python3 -c "import sys, json; data=json.load(sys.stdin); print(data.get('id', ''))")
+          if [ -z "$deploy_id" ]; then
+            echo "Render deploy failed: $response"
+            exit 1
+          fi
+          echo "deploy_id=$deploy_id" >> $GITHUB_OUTPUT
+
+      - name: Wait for Render deploy
+        run: |
+          set -e
+          deploy_id=${{ steps.render_deploy.outputs.deploy_id }}
+          for i in $(seq 1 30); do
+            status=$(curl -s -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" "https://api.render.com/v1/deploys/$deploy_id" | python3 -c "import sys, json; data=json.load(sys.stdin); print(data.get('status', ''))")
+            echo "Render deploy status: $status"
+            if [ "$status" = "success" ]; then
+              exit 0
+            fi
+            if [ "$status" = "failed" ] || [ "$status" = "crashed" ]; then
+              echo "Render deploy failed"
+              exit 1
+            fi
+            sleep 10
+          done
+          echo "Render deploy did not complete in time"
+          exit 1
