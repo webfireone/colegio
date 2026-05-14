@@ -47,13 +47,20 @@ export function HomePage() {
         <div className="relative z-10">
           <div className="flex items-center gap-4 mb-5">
             <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[var(--color-dorado)] shadow-glow-dorado">
-              {usuario?.fotoPerfil ? (
-                <img src={usuario.fotoPerfil} alt="" className="w-full h-full object-cover" />
-              ) : (
-                <div className="w-full h-full gradient-institucional flex items-center justify-center text-white font-bold text-xl">
-                  {usuario?.nombreCompleto?.charAt(0) || '?'}
-                </div>
-              )}
+              <img
+                src={usuario?.fotoPerfil || ''}
+                alt=""
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.currentTarget
+                  target.style.display = 'none'
+                  const fallback = target.nextElementSibling
+                  if (fallback) (fallback as HTMLElement).style.display = 'flex'
+                }}
+              />
+              <div className="hidden w-full h-full gradient-institucional flex items-center justify-center text-white font-bold text-xl">
+                {usuario?.nombreCompleto?.charAt(0) || '?'}
+              </div>
             </div>
             <div>
               <p className="text-xs font-medium text-[var(--color-texto-secundario)] tracking-[0.15em] uppercase">

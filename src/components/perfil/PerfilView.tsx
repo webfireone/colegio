@@ -2,7 +2,7 @@ import { useAuthStore } from '../../store/authStore'
 import { formatearFecha } from '../../utils/formatos'
 import { useNavigate } from 'react-router-dom'
 import { USUARIOS } from '../../utils/contenidoReal'
-import { getFotoGrupo } from '../../utils/fotos'
+import { getFotoGrupo, getFotoPerfil } from '../../utils/fotos'
 
 export function PerfilView() {
   const usuario = useAuthStore((s) => s.usuario)
@@ -38,14 +38,21 @@ export function PerfilView() {
         {/* Avatar + info */}
         <div className="relative px-6 pb-6 -mt-16">
           <div className="flex items-end gap-4 mb-4">
-            <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl ring-2 ring-[var(--color-dorado)]/30">
-              {usuario.fotoPerfil ? (
-                <img src={usuario.fotoPerfil} alt={usuario.nombreCompleto} className="w-full h-full object-cover" />
-              ) : (
-                <span className="flex items-center justify-center w-full h-full" style={{ background: 'linear-gradient(135deg, var(--color-institucional), var(--color-celeste))' }}>
-                  <span className="text-white text-2xl font-bold">{usuario.nombreCompleto.charAt(0)}</span>
-                </span>
-              )}
+            <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl ring-2 ring-[var(--color-dorado)]/30 relative">
+              <img
+                src={usuario.fotoPerfil || ''}
+                alt={usuario.nombreCompleto}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.currentTarget
+                  target.style.display = 'none'
+                  const fallback = target.nextElementSibling
+                  if (fallback) (fallback as HTMLElement).style.display = 'flex'
+                }}
+              />
+              <span className="hidden absolute inset-0 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--color-institucional), var(--color-celeste))' }}>
+                <span className="text-white text-2xl font-bold">{usuario.nombreCompleto.charAt(0)}</span>
+              </span>
             </div>
             <button
               onClick={() => navigate('/perfil/editar')}
@@ -145,7 +152,7 @@ export function PerfilView() {
               >
                 <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white/10">
                   <img
-                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${a.nombre}`}
+                    src={getFotoPerfil(a.nombre)}
                     alt={a.nombre}
                     className="w-full h-full object-cover"
                   />

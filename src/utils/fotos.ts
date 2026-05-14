@@ -47,6 +47,7 @@ const FOTOS_GRUPO = [
   '/fotos/Gemini_Generated_Image_ic5vudic5vudic5v.png',
   '/fotos/Gemini_Generated_Image_tuwjdmtuwjdmtuwj.png',
   '/fotos/Gemini_Generated_Image_xrti3dxrti3dxrti.png',
+  '/fotos/MURAL.jpg',
 ]
 
 const VIDEOS_REALES: Record<string, string> = {
