@@ -32,7 +32,7 @@ export function LoginPage() {
 
           <div className="space-y-3">
             <button
-              onClick={() => navigate('/login')}
+              onClick={() => navigate('/login/form')}
               className="w-full py-3 rounded-lg bg-[var(--color-institucional)] text-white font-semibold hover:bg-[var(--color-institucional-light)] transition-colors"
             >
               Iniciar sesión
