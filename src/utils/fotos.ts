@@ -1,5 +1,6 @@
 const FOTOS_REALES: Record<string, string> = {
   claudia: '/fotos/Claudia.jpg',
+  sandro: '/fotos/SANDRO.jpg',
   edy: '/fotos/Edy.jpg',
   fabiana: '/fotos/Fabiana.jpg',
   jorge: '/fotos/Jorge.jpg',
