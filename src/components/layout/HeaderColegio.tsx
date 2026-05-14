@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store/authStore'
-import { useUIStore } from '../../store/uiStore'
 import { useNotificacionStore } from '../../store/notificacionStore'
 import logoInmaculada from '../../../logo/logo.jpg'
 
@@ -19,7 +18,6 @@ export function HeaderColegio() {
   const [query, setQuery] = useState('')
   const usuario = useAuthStore((s) => s.usuario)
   const cerrarSesion = useAuthStore((s) => s.logout)
-  const { toggleFontSize, toggleHighContrast } = useUIStore()
   const noLeidas = useNotificacionStore((s) => s.noLeidas)
 
   useEffect(() => {
@@ -122,24 +120,6 @@ export function HeaderColegio() {
               )}
             </button>
 
-            {/* Font size */}
-            <button
-              onClick={toggleFontSize}
-              className="p-1.5 text-xs text-[var(--color-texto-secundario)] hover:text-white transition-colors font-bold"
-              aria-label="Cambiar tamaño de letra"
-            >
-              A<span className="text-[9px]">A</span>
-            </button>
-
-            {/* High contrast */}
-            <button
-              onClick={toggleHighContrast}
-              className="p-1.5 text-xs text-[var(--color-texto-secundario)] hover:text-white transition-colors"
-              aria-label="Alto contraste"
-            >
-              ◐
-            </button>
-
             {/* Profile */}
             {usuario && (
               <button
@@ -160,10 +140,10 @@ export function HeaderColegio() {
             {/* Logout */}
             <button
               onClick={cerrarSesion}
-              className="ml-1 p-1.5 text-xs text-[var(--color-texto-secundario)] hover:text-[var(--color-error)] transition-colors"
+              className="ml-2 px-3 py-1 rounded-full bg-[var(--color-institucional)] text-[var(--color-blanco)] text-[11px] font-semibold hover:bg-[var(--color-celeste)] transition-colors"
               aria-label="Cerrar sesión"
             >
-              ✕
+              Salir
             </button>
           </div>
         </div>
