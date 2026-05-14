@@ -18,37 +18,85 @@ export function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-[var(--color-institucional)] to-[var(--color-celeste)] flex items-center justify-center p-4 overflow-hidden">
-      <div className="deco-orb w-96 h-96 -top-20 -left-20 animate-levitate" />
-      <div className="deco-orb w-64 h-64 -bottom-10 -right-10 animate-float-reverse" style={{ background: 'radial-gradient(circle at center, rgba(212,175,55,0.06), transparent 70%)' }} />
-      <div className="deco-ring w-[500px] h-[500px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-float" />
-      <div className="deco-ring w-[400px] h-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-float-reverse" style={{ animationDelay: '2s' }} />
-      <div className="w-full max-w-md relative z-10">
-        <div className="glass-card rounded-2xl p-8">
-          <div className="text-center mb-6">
-            <div className="relative inline-block">
+    <div className="relative min-h-screen bg-[#080b14] flex flex-col overflow-hidden">
+      {/* ════════════════════════════════════════════════
+         HORIZONTE.FM-STYLE HERO — full bleed MURAL
+         ════════════════════════════════════════════════ */}
+      <div className="relative flex flex-col items-center justify-center px-4 pt-12 pb-6 min-h-[55vh] md:min-h-[60vh] overflow-hidden">
+        {/* Blurred background image — like horizonte .now-playing-bg */}
+        <div
+          className="absolute inset-0 bg-cover bg-center scale-110"
+          style={{
+            backgroundImage: 'url(/fotos/MURAL.jpg)',
+            filter: 'blur(16px)',
+          }}
+        />
+        {/* Dark velo overlay — like horizonte rgba(0,0,0,0.2) */}
+        <div className="absolute inset-0 bg-[#080b14]/60" />
+
+        {/* Decorative gradient glow */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full opacity-20 pointer-events-none" style={{ background: 'radial-gradient(ellipse, var(--color-celeste), transparent 70%)' }} />
+
+        {/* Hero content — z-10 to sit above blur */}
+        <div className="relative z-10 flex flex-col items-center text-center animate-fade-in">
+          {/* Main cover image — like horizonte #now-playing-cover */}
+          <div className="relative group">
+            <div className="w-44 h-44 md:w-56 md:h-56 rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.6)] ring-1 ring-white/10 transition-transform duration-700 hover:scale-[1.02]">
               <img
-                src="/logo.jpg"
+                src="/fotos/MURAL.jpg"
                 alt="Instituto Inmaculada Concepción"
-                className="w-28 h-28 rounded-2xl object-cover mx-auto mb-4 shadow-glow"
+                className="w-full h-full object-cover"
               />
-              <div className="absolute -inset-2 rounded-3xl bg-gradient-to-br from-[var(--color-dorado)]/20 to-transparent -z-10 blur-sm" />
             </div>
-            <h1 className="text-2xl font-bold gradient-text-institucional" style={{ fontFamily: 'var(--font-heading)' }}>
-              Instituto Inmaculada Concepción
-            </h1>
-            <div className="divider-line-left mx-auto mt-2 mb-2" />
-            <p className="text-[var(--color-texto-secundario)] text-sm italic">
-              "Cuarenta años después, una sola app para seguir juntos"
-            </p>
+            {/* Glow ring */}
+            <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-[var(--color-celeste)]/10 via-transparent to-[var(--color-dorado)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl pointer-events-none" />
           </div>
 
+          {/* Title — like horizonte #now-playing-title */}
+          <h1
+            className="mt-5 text-3xl md:text-4xl font-bold tracking-tight"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              color: '#ffffff',
+              textShadow: '0 2px 20px rgba(0,0,0,0.5)',
+            }}
+          >
+            Instituto Inmaculada
+          </h1>
+
+          {/* Subtitle — like horizonte #now-playing-artist */}
+          <p
+            className="mt-1 text-lg md:text-xl font-light tracking-wide"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontStyle: 'italic',
+              color: 'rgba(255,255,255,0.7)',
+              textShadow: '0 2px 12px rgba(0,0,0,0.5)',
+            }}
+          >
+            Promoción 1986 · Conectados por Siempre
+          </p>
+
+          {/* Divider line — editorial touch */}
+          <div className="mt-4 w-16 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent)' }} />
+        </div>
+
+        {/* Decorative orbs */}
+        <div className="deco-orb w-72 h-72 -top-32 -left-32 opacity-10 animate-float pointer-events-none" />
+        <div className="deco-orb w-48 h-48 -bottom-16 -right-16 opacity-10 animate-float-reverse pointer-events-none" style={{ background: 'radial-gradient(circle at center, rgba(212,175,55,0.08), transparent 70%)' }} />
+      </div>
+
+      {/* ════════════════════════════════════════════════
+         LOGIN FORM — glass card below the hero
+         ════════════════════════════════════════════════ */}
+      <div className="relative z-10 flex-1 flex items-start justify-center px-4 pb-8 -mt-8">
+        <div className="w-full max-w-md glass-deep rounded-2xl p-6 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
           <p className="text-center text-sm text-[var(--color-texto-secundario)] mb-4">
             Elegí tu nombre para ingresar
           </p>
 
           {error && (
-            <div className="p-3 rounded-lg bg-red-50 text-[var(--color-error)] text-sm mb-4 text-center animate-fade-in" role="alert">
+            <div className="p-3 rounded-lg bg-[var(--color-error)]/10 text-[var(--color-error)] text-sm mb-4 text-center animate-fade-in border border-[var(--color-error)]/20" role="alert">
               {error}
             </div>
           )}
@@ -73,21 +121,21 @@ export function LoginPage() {
             ))}
           </div>
 
-          <p className="text-center text-xs text-[var(--color-texto-secundario)] mt-4">
+          <p className="text-center text-xs text-[var(--color-texto-terciario)] mt-4">
             Clave: tu nombre en minúsculas
           </p>
 
-          <div className="mt-4 pt-4 border-t border-gray-100">
+          <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
             <button
               onClick={() => navigate('/registro')}
-              className="w-full text-sm text-[var(--color-celeste)] font-medium hover:underline text-center block"
+              className="w-full text-sm text-[var(--color-celeste)] font-medium hover:text-white transition-colors text-center block"
             >
               ¿No estás en la lista? Registrarse
             </button>
           </div>
 
-          <p className="text-center text-xs text-[var(--color-texto-secundario)] mt-6">
-            Solo para exalumnos del Instituto Inmaculada Concepción · Promoción 1986
+          <p className="text-center text-xs text-[var(--color-texto-terciario)] mt-4">
+            Solo para exalumnos · Promoción 1986
           </p>
         </div>
       </div>
