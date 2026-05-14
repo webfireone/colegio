@@ -14,7 +14,7 @@ export function LoginForm() {
   const { login, loginConNombre, cargando, error, limpiarError } = useAuthStore()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [modo, setModo] = useState<'form' | 'lista'>('lista')
+  const [modo, setModo] = useState<'form' | 'lista'>('form')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
