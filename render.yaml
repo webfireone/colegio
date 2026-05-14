@@ -5,6 +5,9 @@ services:
     buildCommand: npm run build
     staticPublishPath: dist
     pullRequestPreviewsEnabled: false
+    redirects:
+      - source: "/*"
+        destination: "/index.html"
     envVars:
       - key: NODE_VERSION
         value: 20.20.2
