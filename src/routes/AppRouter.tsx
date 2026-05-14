@@ -6,6 +6,7 @@ import { VideosPage } from '../pages/VideosPage'
 import { ChatsPage } from '../pages/ChatsPage'
 import { PerfilPage } from '../pages/PerfilPage'
 import { PerfilAmigoPage } from '../pages/PerfilAmigoPage'
+import { EditarPerfilPage } from '../pages/EditarPerfilPage'
 import { LoginPage } from '../pages/LoginPage'
 import { LoginFormPage } from '../pages/LoginFormPage'
 import { RegistroPage } from '../pages/RegistroPage'
@@ -29,6 +30,7 @@ export function AppRouter() {
         <Route path="/videos" element={<VideosPage />} />
         <Route path="/chats" element={<ChatsPage />} />
         <Route path="/perfil" element={<PerfilPage />} />
+        <Route path="/perfil/editar" element={<EditarPerfilPage />} />
         <Route path="/perfil/:id" element={<PerfilAmigoPage />} />
         <Route path="/busqueda" element={<BusquedaPage />} />
         <Route path="/notificaciones" element={<NotificacionesPage />} />

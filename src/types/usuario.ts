@@ -6,6 +6,7 @@ export interface Usuario {
   id: string
   email: string
   nombreCompleto: string
+  alias?: string
   apellidoSoltera?: string
   telefono?: string
   anioEgreso: number
@@ -37,7 +38,9 @@ export interface Usuario {
 
 export interface UsuarioFormData {
   nombreCompleto: string
+  alias?: string
   apellidoSoltera?: string
+  telefono?: string
   anioEgreso?: number
   biografia?: string
   fotoPerfil?: string

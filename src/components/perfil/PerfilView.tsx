@@ -28,9 +28,9 @@ export function PerfilView() {
         {/* Cover image */}
         <div className="relative h-40 md:h-48 overflow-hidden">
           <img
-            src={getFotoGrupo()}
-            alt=""
-            className="w-full h-full object-cover opacity-40"
+            src={usuario.fotoPortada || getFotoGrupo()}
+            alt="Portada de perfil"
+            className="w-full h-full object-cover opacity-80"
           />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 30%, #0f172a 100%)' }} />
         </div>
@@ -69,6 +69,9 @@ export function PerfilView() {
           </div>
 
           <h1 className="text-2xl font-bold text-white/90">{usuario.nombreCompleto}</h1>
+          {usuario.alias && (
+            <p className="text-sm text-[var(--color-celeste)]">@{usuario.alias}</p>
+          )}
           {usuario.apellidoSoltera && (
             <p className="text-sm text-white/40">de soltera: {usuario.apellidoSoltera}</p>
           )}
@@ -77,6 +80,7 @@ export function PerfilView() {
             <span>🎓 Promoción 1986</span>
             {usuario.ubicacion.ciudad && <span>📍 {usuario.ubicacion.ciudad}{usuario.ubicacion.pais ? `, ${usuario.ubicacion.pais}` : ''}</span>}
             {usuario.profesion && <span>💼 {usuario.profesion}</span>}
+            {usuario.telefono && <span>📞 {usuario.telefono}</span>}
           </div>
 
           {/* Stats */}

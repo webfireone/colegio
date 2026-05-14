@@ -19,7 +19,7 @@ interface AuthState {
   registro: (data: UsuarioFormData & { email: string; password: string }) => Promise<void>
   cambiarClave: (nuevaClave: string) => Promise<void>
   logout: () => void
-  actualizarPerfil: (data: UsuarioFormData) => void
+  actualizarPerfil: (data: UsuarioFormData) => Promise<void>
   limpiarError: () => void
 }
 
@@ -47,6 +47,7 @@ function crearUsuarioMock(nombreLower: string, userData: { nombre: string; email
     id: `user-${nombreLower}`,
     email: userData.email,
     nombreCompleto: userData.nombre,
+    alias: nombreLower,
     telefono: userData.telefono,
     anioEgreso: 1986,
     biografia: '',
@@ -155,7 +156,9 @@ export const useAuthStore = create<AuthState>()(
             id: `user-${Date.now()}`,
             email: data.email,
             nombreCompleto: data.nombreCompleto,
+            alias: data.alias,
             apellidoSoltera: data.apellidoSoltera,
+            telefono: data.telefono,
             anioEgreso: data.anioEgreso ?? 1986,
             biografia: data.biografia,
             fotoPerfil: data.fotoPerfil ?? getFotoPerfil(data.nombreCompleto),
@@ -219,10 +222,20 @@ export const useAuthStore = create<AuthState>()(
         })
       },
 
-      actualizarPerfil: (data) => {
-        const usuario = get().usuario
-        if (!usuario) return
-        set({ usuario: { ...usuario, ...data } })
+      actualizarPerfil: async (data) => {
+        const usuarioActual = get().usuario
+        if (!usuarioActual) return
+        const perfilActualizado = { ...usuarioActual, ...data }
+        set({ usuario: perfilActualizado })
+
+        const firebaseUser = auth.currentUser
+        if (firebaseUser) {
+          try {
+            await setDoc(doc(db, 'usuarios', firebaseUser.uid), perfilActualizado, { merge: true })
+          } catch (error) {
+            console.warn('Error al guardar perfil en Firestore:', error)
+          }
+        }
       },
 
       limpiarError: () => set({ error: null }),
