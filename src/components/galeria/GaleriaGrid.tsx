@@ -21,6 +21,23 @@ export function GaleriaGrid() {
   const [fotoSeleccionada, setFotoSeleccionada] = useState<FotoItem | null>(null)
   const [comentarios, setComentarios] = useState<Record<string, string[]>>({})
   const [nota, setNota] = useState('')
+  const [likes, setLikes] = useState<Record<string, boolean>>(
+    () => Object.fromEntries(fotosMock.map((foto) => [foto.id, foto.like]))
+  )
+  const [likeCounts, setLikeCounts] = useState<Record<string, number>>(
+    () => Object.fromEntries(fotosMock.map((foto) => [foto.id, foto.like ? 128 : 127]))
+  )
+
+  const toggleLike = (id: string) => {
+    setLikes((prev) => {
+      const nuevoEstado = !prev[id]
+      setLikeCounts((counts) => ({
+        ...counts,
+        [id]: counts[id] + (nuevoEstado ? 1 : -1),
+      }))
+      return { ...prev, [id]: nuevoEstado }
+    })
+  }
 
   const agregarComentario = () => {
     if (!fotoSeleccionada || !nota.trim()) return
@@ -51,10 +68,10 @@ export function GaleriaGrid() {
             aria-label={`Abrir foto de ${foto.autor}`}
           >
             <img src={foto.url} alt={`Foto de ${foto.autor}`} className="w-full h-full object-cover" loading="lazy" />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-end p-3">
-              <div className="rounded-full bg-black/50 px-2 py-1 text-white text-[11px] opacity-0 group-hover:opacity-100 transition-opacity">
-                {foto.autor}
-              </div>
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors" />
+            <div className="absolute bottom-3 left-3 flex items-center gap-2 rounded-full bg-black/60 px-3 py-1 text-[11px] text-white/90 opacity-0 group-hover:opacity-100 transition-opacity">
+              <span className="flex items-center gap-1">❤️ {likeCounts[foto.id]}</span>
+              <span className="flex items-center gap-1">💬 {comentarios[foto.id]?.length ?? 0}</span>
             </div>
           </button>
         ))}
@@ -63,20 +80,44 @@ export function GaleriaGrid() {
       <ModalGlass abierto={!!fotoSeleccionada} onClose={() => setFotoSeleccionada(null)} titulo={fotoSeleccionada ? `Foto de ${fotoSeleccionada.autor}` : 'Foto'}>
         {fotoSeleccionada && (
           <div className="grid gap-5 lg:grid-cols-[1.45fr_0.95fr]">
-            <div className="overflow-hidden rounded-[32px] bg-[var(--color-surface)] shadow-[0_30px_80px_rgba(0,0,0,0.22)]">
-              <img
-                src={fotoSeleccionada.url}
-                alt={fotoSeleccionada.autor}
-                className="w-full h-[min(60vh,680px)] object-cover"
-              />
-              <div className="flex items-center justify-between gap-3 border-t border-white/10 bg-[#071020]/90 px-5 py-4">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between gap-4 rounded-[32px] bg-[#071026] border border-white/10 px-5 py-4 shadow-[0_18px_40px_rgba(0,0,0,0.18)]">
                 <div>
-                  <p className="text-xs text-[var(--color-texto-secundario)]">Compartido por</p>
-                  <p className="text-sm font-semibold text-white">{fotoSeleccionada.autor}</p>
+                  <p className="text-xs text-[var(--color-texto-secundario)]">Foto de</p>
+                  <p className="text-base font-semibold text-white">{fotoSeleccionada.autor}</p>
                 </div>
-                <div className="flex items-center gap-4 text-sm text-white/70">
-                  <span className="flex items-center gap-1"><span>❤️</span> 128</span>
-                  <span className="flex items-center gap-1"><span>💬</span> {comentarios[fotoSeleccionada.id]?.length ?? 0}</span>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => toggleLike(fotoSeleccionada.id)}
+                    className="rounded-2xl bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/20"
+                  >
+                    {likes[fotoSeleccionada.id] ? '❤️ Me gusta' : '🤍 Me gusta'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFotoSeleccionada(null)}
+                    className="rounded-2xl bg-white/10 px-4 py-2 text-sm text-white/80 transition hover:bg-white/20"
+                  >
+                    Cerrar
+                  </button>
+                </div>
+              </div>
+              <div className="overflow-hidden rounded-[32px] bg-[var(--color-surface)] shadow-[0_30px_80px_rgba(0,0,0,0.22)]">
+                <img
+                  src={fotoSeleccionada.url}
+                  alt={fotoSeleccionada.autor}
+                  className="w-full h-[min(60vh,680px)] object-cover"
+                />
+                <div className="flex items-center justify-between gap-3 border-t border-white/10 bg-[#071020]/90 px-5 py-4">
+                  <div>
+                    <p className="text-xs text-[var(--color-texto-secundario)]">Compartido por</p>
+                    <p className="text-sm font-semibold text-white">{fotoSeleccionada.autor}</p>
+                  </div>
+                  <div className="flex items-center gap-4 text-sm text-white/70">
+                    <span className="flex items-center gap-1"><span>❤️</span> {likeCounts[fotoSeleccionada.id]}</span>
+                    <span className="flex items-center gap-1"><span>💬</span> {comentarios[fotoSeleccionada.id]?.length ?? 0}</span>
+                  </div>
                 </div>
               </div>
             </div>

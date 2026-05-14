@@ -72,13 +72,18 @@ export function PerfilView() {
           {usuario.alias && (
             <p className="text-sm text-[var(--color-celeste)]">@{usuario.alias}</p>
           )}
+          <p className="text-sm text-white/50 mt-1">Franciscano, amigos de toda una vida</p>
           {usuario.apellidoSoltera && (
             <p className="text-sm text-white/40">de soltera: {usuario.apellidoSoltera}</p>
           )}
 
           <div className="flex flex-wrap gap-x-5 gap-y-2 mt-3 text-sm text-white/50">
             <span>🎓 Promoción 1986</span>
-            {usuario.ubicacion.ciudad && <span>📍 {usuario.ubicacion.ciudad}{usuario.ubicacion.pais ? `, ${usuario.ubicacion.pais}` : ''}</span>}
+            {(usuario.ubicacion.ciudad || usuario.ubicacion.provincia || usuario.ubicacion.pais) && (
+              <span>
+                📍 {usuario.ubicacion.ciudad || '—'}{usuario.ubicacion.provincia ? `, ${usuario.ubicacion.provincia}` : ''}{usuario.ubicacion.pais ? `, ${usuario.ubicacion.pais}` : ''}
+              </span>
+            )}
             {usuario.profesion && <span>💼 {usuario.profesion}</span>}
             {usuario.telefono && <span>📞 {usuario.telefono}</span>}
           </div>
@@ -125,7 +130,7 @@ export function PerfilView() {
 
       {/* ════════════════════════════════════
          HOBBIES / INTERESES
-         ════════════════════════════════════ */}
+         ════════════════════════════ */}
       {usuario.hobbies && usuario.hobbies.length > 0 && (
         <section className="rounded-2xl p-5" style={{ background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.06)' }}>
           <h3 className="text-sm font-semibold text-white/60 tracking-wide uppercase mb-3">Intereses</h3>
@@ -139,9 +144,32 @@ export function PerfilView() {
         </section>
       )}
 
+      <section className="rounded-2xl p-5" style={{ background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="flex items-center justify-between gap-4 mb-4">
+          <div>
+            <h3 className="text-sm font-semibold text-white/60 uppercase tracking-wide">Recuerdos</h3>
+            <p className="text-xs text-white/40">Fotos del grupo para revivir momentos.</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => navigate('/fotos')}
+            className="rounded-full bg-[var(--color-institucional)] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[var(--color-celeste)]"
+          >
+            Ver todas
+          </button>
+        </div>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          {USUARIOS.slice(0, 4).map((a, index) => (
+            <div key={`${a.id}-${index}`} className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-[0_18px_30px_rgba(0,0,0,0.12)]">
+              <img src={getFotoGrupo()} alt={`Recuerdo ${index + 1}`} className="h-24 w-full object-cover" />
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ════════════════════════════════════
          AMIGOS — horizontal strip
-         ════════════════════════════════════ */}
+         ════════════════════════════ */}
       {amigosData.length > 0 && (
         <section className="rounded-2xl p-5" style={{ background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.06)' }}>
           <h3 className="text-sm font-semibold text-white/60 tracking-wide uppercase mb-3">

@@ -69,6 +69,27 @@ export function EditarPerfil({ onCancel, onSuccess }: EditarPerfilProps) {
         />
       </div>
 
+      {(form.fotoPerfil || form.fotoPortada) && (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 mb-4">
+          <div className="rounded-3xl overflow-hidden border border-gray-200 bg-slate-50">
+            <div className="px-4 py-3 text-sm font-medium text-slate-700">Vista previa perfil</div>
+            {form.fotoPerfil ? (
+              <img src={form.fotoPerfil} alt="Vista previa foto de perfil" className="h-40 w-full object-cover" />
+            ) : (
+              <div className="flex h-40 items-center justify-center bg-slate-100 text-slate-400">URL de perfil vacía</div>
+            )}
+          </div>
+          <div className="rounded-3xl overflow-hidden border border-gray-200 bg-slate-50">
+            <div className="px-4 py-3 text-sm font-medium text-slate-700">Vista previa portada</div>
+            {form.fotoPortada ? (
+              <img src={form.fotoPortada} alt="Vista previa foto de portada" className="h-40 w-full object-cover" />
+            ) : (
+              <div className="flex h-40 items-center justify-center bg-slate-100 text-slate-400">URL de portada vacía</div>
+            )}
+          </div>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         <div>
           <label className="block text-sm font-medium mb-1">Foto de perfil (URL)</label>
@@ -92,24 +113,71 @@ export function EditarPerfil({ onCancel, onSuccess }: EditarPerfilProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         <div>
-          <label className="block text-sm font-medium mb-1">Teléfono</label>
+          <label className="block text-sm font-medium mb-1">Ciudad</label>
           <input
-            type="tel"
-            value={form.telefono ?? ''}
-            onChange={(e) => actualizar('telefono', e.target.value)}
+            type="text"
+            value={form.ubicacion.ciudad ?? ''}
+            onChange={(e) => setForm((prev) => ({
+              ...prev,
+              ubicacion: { ...prev.ubicacion, ciudad: e.target.value },
+            }))}
             className="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
-            placeholder="+54 9 ..."
+            placeholder="Rosario"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1">Profesión</label>
+          <label className="block text-sm font-medium mb-1">Provincia</label>
           <input
             type="text"
-            value={form.profesion ?? ''}
-            onChange={(e) => actualizar('profesion', e.target.value)}
+            value={form.ubicacion.provincia ?? ''}
+            onChange={(e) => setForm((prev) => ({
+              ...prev,
+              ubicacion: { ...prev.ubicacion, provincia: e.target.value },
+            }))}
             className="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
+            placeholder="Santa Fe"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">País</label>
+          <input
+            type="text"
+            value={form.ubicacion.pais ?? ''}
+            onChange={(e) => setForm((prev) => ({
+              ...prev,
+              ubicacion: { ...prev.ubicacion, pais: e.target.value },
+            }))}
+            className="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
+            placeholder="Argentina"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        <div>
+          <label className="block text-sm font-medium mb-1">Estado civil</label>
+          <select
+            value={form.estadoCivil ?? 'no especifica'}
+            onChange={(e) => actualizar('estadoCivil', e.target.value as any)}
+            className="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
+          >
+            <option value="no especifica">No especifica</option>
+            <option value="soltero/a">Soltero/a</option>
+            <option value="casado/a">Casado/a</option>
+            <option value="divorciado/a">Divorciado/a</option>
+            <option value="viudo/a">Viudo/a</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-1">Música favorita</label>
+          <input
+            type="text"
+            value={form.musicaFavorita ?? ''}
+            onChange={(e) => actualizar('musicaFavorita', e.target.value)}
+            className="w-full px-4 py-2.5 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
+            placeholder="Por ejemplo: rock nacional"
           />
         </div>
       </div>
