@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate } from 'react-router-dom'
 import { useAuthStore, USUARIOS_REALES } from '../store/authStore'
 
 export function LoginPage() {
@@ -7,8 +7,7 @@ export function LoginPage() {
   const estaAutenticado = useAuthStore((s) => s.estaAutenticado)
 
   if (estaAutenticado) {
-    navigate('/', { replace: true })
-    return null
+    return <Navigate to="/" replace />
   }
 
   const handleClickUsuario = async (nombre: string) => {
