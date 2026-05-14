@@ -104,8 +104,12 @@ export const useAuthStore = create<AuthState>()(
             }
           } catch (fbErr: any) {
             // Firebase falló → fallback a mock
-            if (fbErr.code !== 'auth/invalid-credential' && fbErr.code !== 'auth/user-not-found') {
-              throw fbErr
+            if (fbErr.code !== 'auth/invalid-credential'
+              && fbErr.code !== 'auth/user-not-found'
+              && fbErr.code !== 'PERMISSION_DENIED'
+              && !fbErr.message?.includes('permission')
+            ) {
+              console.warn('Firebase error, usando mock:', fbErr.code || fbErr.message)
             }
             const nombreLower = email.split('@')[0].toLowerCase()
             const userData = USUARIOS_REALES[nombreLower]
