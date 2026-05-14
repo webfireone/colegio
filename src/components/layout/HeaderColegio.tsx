@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store/authStore'
 import { useNotificacionStore } from '../../store/notificacionStore'
-import logoInmaculada from '../../../logo/logo.jpg'
 
 const navItems = [
   { to: '/', icon: '🏠', label: 'Inicio' },
@@ -56,7 +55,7 @@ export function HeaderColegio() {
             onClick={() => navigate('/')}
           >
             <img
-              src={logoInmaculada}
+              src="/logo.jpg"
               alt="Inmaculada logo"
               className="w-10 h-10 rounded-lg object-cover shadow-sm border border-white/10"
             />
