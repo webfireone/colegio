@@ -1,10 +1,11 @@
+import { getFotoPerfil } from '../../utils/fotos'
 import { USUARIOS } from '../../utils/contenidoReal'
 
 export function MomentosDelDia() {
   const historias = USUARIOS.slice(0, 8).map((u, i) => ({
     id: `h-${u.id}`,
     nombre: u.nombre.split(' ')[0],
-    foto: `https://api.dicebear.com/7.x/avataaars/svg?seed=${u.nombre}`,
+    foto: getFotoPerfil(u.nombre),
     visto: i % 3 === 0,
   }))
 

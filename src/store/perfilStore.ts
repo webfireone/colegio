@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { Usuario, UsuarioFormData } from '../types'
+import { getFotoPerfil } from '../utils/fotos'
 import { USUARIOS } from '../utils/contenidoReal'
 
 interface PerfilState {
@@ -28,7 +29,7 @@ export const usePerfilStore = create<PerfilState>((set) => ({
         anioEgreso: 1986,
         biografia: `${u.profesion}. Amante de ${u.hobbies.slice(0, 2).join(' y ')}. Feliz de reencontrarme con la promo después de 40 años.`,
         profesion: u.profesion,
-        fotoPerfil: `https://api.dicebear.com/7.x/avataaars/svg?seed=${u.nombre}`,
+        fotoPerfil: getFotoPerfil(u.nombre),
         fotoPortada: [
           'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800',
           'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800',

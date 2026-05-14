@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { Publicacion } from '../types'
 import { Publicacion as PublicacionTipo } from '../types/publicacion'
+import { getFotoPerfil } from '../utils/fotos'
 import { USUARIOS, PUBLICACIONES } from '../utils/contenidoReal'
 
 interface FeedState {
@@ -61,7 +62,7 @@ export const useFeedStore = create<FeedState>((set, get) => ({
         id: `pub-real-${i}`,
         autorId: p.autorId,
         autorNombre: autor.nombre,
-        autorFoto: `https://api.dicebear.com/7.x/avataaars/svg?seed=${autor.nombre}`,
+        autorFoto: getFotoPerfil(autor.nombre),
         plataforma: p.plataforma,
         contenido: p.contenido,
         imagenes: p.imagenes,
@@ -74,7 +75,7 @@ export const useFeedStore = create<FeedState>((set, get) => ({
           id: `c-real-${i}`,
           autorId: otros[0].id,
           autorNombre: otros[0].nombre,
-          autorFoto: `https://api.dicebear.com/7.x/avataaars/svg?seed=${otros[0].nombre}`,
+          autorFoto: getFotoPerfil(otros[0].nombre),
           texto: '¡Qué hermoso recuerdo! Me encanta ❤️',
           reacciones: { like: [otros[1]?.id].filter(Boolean), encanta: [], divierte: [], asombra: [], entristece: [], enoja: [] },
           fechaCreacion: Date.now() - 1800000,

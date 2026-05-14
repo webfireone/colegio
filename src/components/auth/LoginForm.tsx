@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { getFotoPerfil } from '../../utils/fotos'
 import { useAuthStore, USUARIOS_REALES } from '../../store/authStore'
 
 interface UserEntry {
@@ -47,7 +48,7 @@ export function LoginForm() {
                 >
                   <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-[var(--color-institucional)] to-[var(--color-celeste)]">
                     <img
-                      src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user.nombre}`}
+                      src={getFotoPerfil(user.nombre)}
                       alt=""
                       className="w-full h-full object-cover"
                     />

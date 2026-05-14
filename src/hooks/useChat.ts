@@ -1,3 +1,4 @@
+import { getFotoPerfil } from '../utils/fotos'
 import { useChatStore } from '../store/chatStore'
 import { Mensaje } from '../types'
 
@@ -18,7 +19,7 @@ export function useChat() {
       conversacionId,
       emisorId: 'user-1',
       emisorNombre: 'María López',
-      emisorFoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Maria',
+      emisorFoto: getFotoPerfil('Maria'),
       tipo,
       contenido,
       archivoUrl,

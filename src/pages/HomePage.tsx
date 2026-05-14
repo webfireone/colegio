@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
 import { useFeedStore } from '../store/feedStore'
 import { FeedUnificado } from '../components/feed/FeedUnificado'
+import { getFotoPerfil } from '../utils/fotos'
 import { USUARIOS, EVENTOS } from '../utils/contenidoReal'
 
 function pickSlice<T>(arr: T[], count: number): T[] {
@@ -203,7 +204,7 @@ export function HomePage() {
                 <div className="relative">
                   <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-[var(--color-dorado)] group-hover:border-[var(--color-celeste)] transition-all duration-400 shadow-glow-dorado group-hover:shadow-glow">
                     <img
-                      src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${u.nombre}`}
+                      src={getFotoPerfil(u.nombre)}
                       alt={u.nombre}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-400"
                     />

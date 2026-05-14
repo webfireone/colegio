@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { getFotoPerfil } from '../utils/fotos'
 import { Notificacion } from '../types'
 
 interface NotificacionState {
@@ -24,31 +25,7 @@ export const useNotificacionStore = create<NotificacionState>((set) => ({
         mensaje: 'A Juan Pérez le gusta tu foto',
         referenciaId: 'pub-2', emisorId: 'user-2',
         emisorNombre: 'Juan Pérez',
-        emisorFoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Juan',
-        leida: false, fechaCreacion: Date.now() - 600000,
-      },
-      {
-        id: 'n2', usuarioId: 'user-1',
-        tipo: 'comentario', plataforma: 'facebook',
-        mensaje: 'Ana García comentó tu publicación',
-        referenciaId: 'pub-1', emisorId: 'user-3',
-        emisorNombre: 'Ana García',
-        emisorFoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ana',
-        leida: false, fechaCreacion: Date.now() - 1800000,
-      },
-      {
-        id: 'n3', usuarioId: 'user-1',
-        tipo: 'evento_proximo', plataforma: 'facebook',
-        mensaje: 'La Cena Anual de Exalumnos comienza en 3 días',
-        referenciaId: 'event-1',
-        leida: true, fechaCreacion: Date.now() - 86400000,
-      },
-      {
-        id: 'n4', usuarioId: 'user-1',
-        tipo: 'mensaje', plataforma: 'whatsapp',
-        mensaje: 'Juan Pérez te envió un mensaje',
-        emisorId: 'user-2', emisorNombre: 'Juan Pérez',
-        emisorFoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Juan',
+        emisorFoto: getFotoPerfil('Juan'),
         leida: false, fechaCreacion: Date.now() - 300000,
       },
       {

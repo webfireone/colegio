@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { Usuario, UsuarioFormData } from '../types'
+import { getFotoPerfil } from '../utils/fotos'
 import { signInWithEmailAndPassword, signOut, updatePassword } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { auth } from '../services/auth'
@@ -48,7 +49,7 @@ function crearUsuarioMock(nombreLower: string, userData: { nombre: string; email
     telefono: userData.telefono,
     anioEgreso: 1986,
     biografia: '',
-    fotoPerfil: `https://api.dicebear.com/7.x/avataaars/svg?seed=${userData.nombre}`,
+    fotoPerfil: getFotoPerfil(userData.nombre),
     fotoPortada: '',
     ubicacion: {},
     estadoCivil: 'no especifica',
@@ -151,7 +152,7 @@ export const useAuthStore = create<AuthState>()(
             apellidoSoltera: data.apellidoSoltera,
             anioEgreso: data.anioEgreso ?? 1986,
             biografia: data.biografia,
-            fotoPerfil: data.fotoPerfil ?? `https://api.dicebear.com/7.x/avataaars/svg?seed=${data.nombreCompleto}`,
+            fotoPerfil: data.fotoPerfil ?? getFotoPerfil(data.nombreCompleto),
             fotoPortada: data.fotoPortada,
             ubicacion: data.ubicacion,
             estadoCivil: data.estadoCivil,

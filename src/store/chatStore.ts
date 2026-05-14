@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { Conversacion, Mensaje } from '../types'
+import { getFotoPerfil } from '../utils/fotos'
 import { USUARIOS, MENSAJES_CHAT } from '../utils/contenidoReal'
 
 interface ChatState {
@@ -86,7 +87,7 @@ export const useChatStore = create<ChatState>((set, get) => ({
       conversacionId,
       emisorId: i % 2 === 0 ? emisor.id : receptor.id,
       emisorNombre: i % 2 === 0 ? emisor.nombre : receptor.nombre,
-      emisorFoto: `https://api.dicebear.com/7.x/avataaars/svg?seed=${i % 2 === 0 ? emisor.nombre : receptor.nombre}`,
+      emisorFoto: getFotoPerfil(i % 2 === 0 ? emisor.nombre : receptor.nombre),
       tipo: frase.includes('🎤') ? 'audio' : 'texto',
       contenido: frase,
       duracionAudio: frase.includes('🎤') ? 32 : undefined,

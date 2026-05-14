@@ -1,4 +1,5 @@
 import { useNavigate, Navigate } from 'react-router-dom'
+import { getFotoPerfil } from '../utils/fotos'
 import { useAuthStore, USUARIOS_REALES } from '../store/authStore'
 
 export function LoginPage() {
@@ -62,7 +63,7 @@ export function LoginPage() {
               >
                 <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-[var(--color-institucional)] to-[var(--color-celeste)]">
                   <img
-                    src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${u.nombre}`}
+                    src={getFotoPerfil(u.nombre)}
                     alt=""
                     className="w-full h-full object-cover"
                   />

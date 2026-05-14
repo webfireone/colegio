@@ -1,3 +1,4 @@
+import { getFotoPerfil } from '../../utils/fotos'
 import { USUARIOS } from '../../utils/contenidoReal'
 import { PUBLICACIONES } from '../../utils/contenidoReal'
 
@@ -10,7 +11,7 @@ export function ReelsFeed() {
       return {
         id: `reel-${i}`,
         autor: autor.nombre,
-        autorFoto: `https://api.dicebear.com/7.x/avataaars/svg?seed=${autor.nombre}`,
+        autorFoto: getFotoPerfil(autor.nombre),
         descripcion: p.contenido ?? '',
         musica: `${autor.musica} - Tema de los 80`,
         likes: Math.floor(Math.random() * 30) + 5,

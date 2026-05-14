@@ -1,3 +1,4 @@
+import { getFotoPerfil } from '../../utils/fotos'
 import { useSearchParams } from 'react-router-dom'
 
 export function ResultadosBusqueda() {
@@ -6,8 +7,8 @@ export function ResultadosBusqueda() {
 
   const resultados = [
     { categoria: 'Personas', items: [
-      { nombre: 'Juan Pérez', subtitulo: 'Buenos Aires', foto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Juan' },
-      { nombre: 'Ana García', subtitulo: 'Córdoba', foto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ana' },
+      { nombre: 'Juan Pérez', subtitulo: 'Buenos Aires', foto: getFotoPerfil('Juan') },
+      { nombre: 'Ana García', subtitulo: 'Córdoba', foto: getFotoPerfil('Ana') },
     ]},
     { categoria: 'Publicaciones', items: [
       { nombre: 'Viaje a Bariloche 1985', subtitulo: 'Juan Pérez · Hace 2h' },
