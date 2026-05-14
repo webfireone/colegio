@@ -44,7 +44,7 @@ export function PublicacionCard({ publicacion }: PubCardProps) {
   }
 
   return (
-    <article className="bg-white rounded-xl shadow-[var(--shadow-card)] overflow-hidden">
+    <article className="glass-card rounded-xl overflow-hidden hover-lift">
       <div className="p-4">
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[var(--color-crema)] flex-shrink-0">

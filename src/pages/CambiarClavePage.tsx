@@ -27,17 +27,21 @@ export function CambiarClavePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[var(--color-institucional)] to-[var(--color-celeste)] flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+    <div className="relative min-h-screen bg-gradient-to-br from-[var(--color-institucional)] to-[var(--color-celeste)] flex items-center justify-center p-4 overflow-hidden">
+      <div className="deco-orb w-80 h-80 -top-16 -left-16 animate-levitate" />
+      <div className="deco-orb w-56 h-56 -bottom-8 -right-8 animate-float-reverse" style={{ background: 'radial-gradient(circle at center, rgba(212,175,55,0.06), transparent 70%)' }} />
+      <div className="deco-ring w-[450px] h-[450px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-float" />
+      <div className="w-full max-w-md relative z-10">
+        <div className="glass-card rounded-2xl p-8">
           <div className="text-center mb-6">
-            <div className="w-16 h-16 bg-[var(--color-dorado)] rounded-full flex items-center justify-center mx-auto mb-3">
+            <div className="w-16 h-16 rounded-full gradient-dorado flex items-center justify-center mx-auto mb-3 shadow-glow-dorado animate-float">
               <span className="text-2xl">🔑</span>
             </div>
-            <h1 className="text-xl font-bold text-[var(--color-institucional)]">
+            <h1 className="text-xl font-bold gradient-text-institucional">
               Bienvenido, {usuario?.nombreCompleto}
             </h1>
-            <p className="text-sm text-[var(--color-texto-secundario)] mt-1">
+            <div className="divider-line-gold mx-auto mt-2 mb-2" />
+            <p className="text-sm text-[var(--color-texto-secundario)]">
               Es tu primera vez. Cambiá tu contraseña para continuar.
             </p>
           </div>
@@ -52,7 +56,7 @@ export function CambiarClavePage() {
                 type="password"
                 value={nuevaClave}
                 onChange={(e) => setNuevaClave(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
+                className="w-full px-4 py-3 rounded-lg border border-gray-200 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)] transition-all duration-300"
                 placeholder="Mínimo 6 caracteres"
                 required
                 minLength={6}
@@ -68,7 +72,7 @@ export function CambiarClavePage() {
                 type="password"
                 value={confirmarClave}
                 onChange={(e) => setConfirmarClave(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
+                className="w-full px-4 py-3 rounded-lg border border-gray-200 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)] transition-all duration-300"
                 placeholder="Repetí la contraseña"
                 required
                 minLength={6}
@@ -76,7 +80,7 @@ export function CambiarClavePage() {
             </div>
 
             {error && (
-              <div className="p-3 rounded-lg bg-red-50 text-[var(--color-error)] text-sm" role="alert">
+              <div className="p-3 rounded-lg bg-red-50 text-[var(--color-error)] text-sm animate-fade-in" role="alert">
                 {error}
               </div>
             )}
@@ -84,7 +88,7 @@ export function CambiarClavePage() {
             <button
               type="submit"
               disabled={cargando}
-              className="w-full py-3 rounded-lg bg-[var(--color-institucional)] text-white font-semibold hover:bg-[var(--color-institucional-light)] disabled:opacity-50 transition-colors"
+              className="w-full py-3 rounded-lg gradient-institucional text-white font-semibold hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 transition-all duration-300 btn-shine"
             >
               {cargando ? 'Guardando...' : 'Cambiar contraseña'}
             </button>

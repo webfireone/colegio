@@ -18,7 +18,7 @@ export function LayoutPrincipal() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-crema)]">
+    <div className="relative min-h-screen bg-[var(--color-crema)] hero-grid">
       <Sidebar />
       <BottomBar />
 

@@ -1,6 +1,7 @@
 import { Component, ErrorInfo, ReactNode } from 'react'
 import { AppRouter } from './routes/AppRouter'
 import { BotonAyuda } from './components/ui/BotonAyuda'
+import { SmoothScroll } from './components/ui/SmoothScroll'
 import { useUIStore } from './store/uiStore'
 import { useEffect } from 'react'
 
@@ -46,11 +47,13 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <a href="#main-content" className="skip-link">
-        Saltar al contenido principal
-      </a>
-      <AppRouter />
-      <BotonAyuda />
+      <SmoothScroll>
+        <a href="#main-content" className="skip-link">
+          Saltar al contenido principal
+        </a>
+        <AppRouter />
+        <BotonAyuda />
+      </SmoothScroll>
     </ErrorBoundary>
   )
 }

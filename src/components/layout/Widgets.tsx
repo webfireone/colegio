@@ -10,7 +10,7 @@ export function Widgets() {
   return (
     <aside className="widgets space-y-4">
       {usuario && (
-        <div className="bg-white rounded-xl p-4 shadow-[var(--shadow-card)]">
+        <div className="glass-card rounded-xl p-4 hover-lift">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--color-dorado)]">
               {usuario.fotoPerfil ? (
@@ -31,16 +31,16 @@ export function Widgets() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl p-4 shadow-[var(--shadow-card)]">
+      <div className="glass-card rounded-xl p-4 hover-glow">
         <div className="flex items-center gap-2 mb-3">
           <span>📅</span>
-          <h3 className="font-semibold text-sm text-[var(--color-institucional)]">Próximos Eventos</h3>
+          <h3 className="font-semibold text-sm gradient-text-institucional">Próximos Eventos</h3>
         </div>
         <div className="space-y-3">
           {EVENTOS.slice(0, 2).map((ev) => (
             <button
               key={ev.id}
-              className="w-full text-left p-3 rounded-lg bg-[var(--color-crema)] hover:bg-[var(--color-dorado)]/10 transition-colors"
+              className="w-full text-left p-3 rounded-lg engraved-pill hover-lift"
             >
               <p className="font-medium text-sm">{ev.titulo}</p>
               <p className="text-xs text-[var(--color-texto-secundario)]">{ev.fecha}</p>
@@ -50,14 +50,14 @@ export function Widgets() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl p-4 shadow-[var(--shadow-card)]">
+      <div className="glass-card rounded-xl p-4 hover-glow">
         <div className="flex items-center gap-2 mb-3">
           <span>🎂</span>
-          <h3 className="font-semibold text-sm text-[var(--color-institucional)]">Cumpleaños</h3>
+          <h3 className="font-semibold text-sm gradient-text-institucional">Cumpleaños</h3>
         </div>
         <div className="space-y-2">
           {USUARIOS.slice(0, 4).map((u, i) => (
-            <div key={u.id} className="flex items-center gap-2 text-sm">
+            <div key={u.id} className="flex items-center gap-2 text-sm p-2 rounded-lg hover:bg-[var(--color-crema)] transition-colors">
               <span>🎂</span>
               <div>
                 <p className="font-medium text-sm">{u.nombre}</p>
@@ -68,15 +68,15 @@ export function Widgets() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl p-4 shadow-[var(--shadow-card)]">
+      <div className="glass-card rounded-xl p-4 hover-glow">
         <div className="flex items-center gap-2 mb-3">
           <span>👥</span>
-          <h3 className="font-semibold text-sm text-[var(--color-institucional)]">Conectados</h3>
+          <h3 className="font-semibold text-sm gradient-text-institucional">Conectados</h3>
         </div>
         <div className="space-y-2">
           {USUARIOS.slice(0, 5).map((u) => (
-            <div key={u.id} className="flex items-center gap-2 text-sm">
-              <span className="w-2 h-2 rounded-full bg-[var(--color-exito)]" />
+            <div key={u.id} className="flex items-center gap-2 text-sm p-1.5 rounded-lg hover:bg-[var(--color-crema)] transition-colors">
+              <span className="w-2 h-2 rounded-full bg-[var(--color-exito)] animate-pulse-glow" />
               <span>{u.nombre}</span>
             </div>
           ))}
@@ -84,11 +84,11 @@ export function Widgets() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl p-4 shadow-[var(--shadow-card)]">
-        <h3 className="font-semibold text-sm text-[var(--color-institucional)] mb-2">Plataformas</h3>
+      <div className="glass-card rounded-xl p-4 hover-glow">
+        <h3 className="font-semibold text-sm gradient-text-institucional mb-2">Plataformas</h3>
         <div className="grid grid-cols-5 gap-2">
           {Object.entries(PLATAFORMA_INFO).map(([key, info]) => (
-            <div key={key} className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-[var(--color-crema)]">
+            <div key={key} className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-[var(--color-crema)] transition-colors hover-lift">
               <span className="text-xl">{info.icono}</span>
               <span className="text-[10px] text-[var(--color-texto-secundario)]">{info.nombre}</span>
             </div>

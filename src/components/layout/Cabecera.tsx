@@ -17,7 +17,7 @@ export function Cabecera() {
   }
 
   return (
-    <header className="sticky top-0 z-20 bg-white/90 backdrop-blur-md border-b border-[var(--color-crema)]">
+    <header className="sticky top-0 z-20 glass-edge">
       <div className="flex items-center gap-3 px-4 py-3">
         <button
           onClick={toggleSidebar}

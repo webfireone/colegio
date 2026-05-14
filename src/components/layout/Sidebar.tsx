@@ -15,14 +15,15 @@ export function Sidebar() {
 
   return (
     <aside
-      className={`sidebar fixed left-0 top-0 h-full bg-[var(--color-institucional)] text-white z-30 flex flex-col transition-all duration-300 ${
+      className={`sidebar fixed left-0 top-0 h-full bg-gradient-to-b from-[var(--color-institucional)] to-[var(--color-institucional-light)] text-white z-30 flex flex-col transition-all duration-300 ${
         sidebarAbierta ? 'w-64' : 'w-16'
       }`}
     >
-      <div className="flex items-center gap-3 p-4 border-b border-white/10">
-        <span className="text-2xl">🏫</span>
+      <div className="relative flex items-center gap-3 p-4 border-b border-white/10 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-dorado)]/5 to-transparent" />
+        <span className="text-2xl relative z-10">🏫</span>
         {sidebarAbierta && (
-          <div>
+          <div className="relative z-10">
             <p className="font-[var(--font-heading)] text-sm leading-tight text-[var(--color-dorado)]">
               Inmaculada Concepción
             </p>
@@ -38,10 +39,10 @@ export function Sidebar() {
             to={item.to}
             end={item.to === '/'}
             className={({ isActive }) =>
-              `flex items-center gap-4 px-4 py-3 mx-2 rounded-lg text-sm transition-colors ${
+              `flex items-center gap-4 px-4 py-3 mx-2 rounded-lg text-sm transition-all duration-300 ${
                 isActive
-                  ? 'bg-white/15 text-[var(--color-dorado)]'
-                  : 'text-white/70 hover:bg-white/10 hover:text-white'
+                  ? 'bg-white/15 text-[var(--color-dorado)] shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]'
+                  : 'text-white/70 hover:bg-white/10 hover:text-white hover-lift'
               }`
             }
           >
@@ -56,7 +57,7 @@ export function Sidebar() {
           <div className="space-y-1 mb-3">
             <p className="text-[10px] uppercase tracking-wider opacity-50">Plataformas</p>
             {Object.entries(PLATAFORMA_INFO).map(([key, info]) => (
-              <div key={key} className="flex items-center gap-2 text-xs opacity-60">
+              <div key={key} className="flex items-center gap-2 text-xs opacity-60 hover:opacity-90 transition-opacity">
                 <span className="text-base">{info.icono}</span>
                 {info.nombre}
               </div>
