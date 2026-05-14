@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuthStore } from '../../store/authStore'
 import { UsuarioFormData } from '../../types'
 
@@ -7,27 +7,58 @@ interface EditarPerfilProps {
   onSuccess: () => void
 }
 
+const initialFormState: UsuarioFormData = {
+  nombreCompleto: '',
+  alias: undefined,
+  apellidoSoltera: undefined,
+  telefono: undefined,
+  biografia: undefined,
+  fotoPerfil: undefined,
+  fotoPortada: undefined,
+  ubicacion: { ciudad: '', provincia: '', pais: '' },
+  estadoCivil: 'no especifica',
+  profesion: undefined,
+  hobbies: [],
+  musicaFavorita: undefined,
+  fraseEmblema: undefined,
+  privacidad: 'solo_companieros',
+}
+
 export function EditarPerfil({ onCancel, onSuccess }: EditarPerfilProps) {
   const usuario = useAuthStore((s) => s.usuario)
   const actualizarPerfil = useAuthStore((s) => s.actualizarPerfil)
-  const [hobbiesText, setHobbiesText] = useState(usuario?.hobbies?.join(', ') ?? '')
+  const [hobbiesText, setHobbiesText] = useState('')
+  const [form, setForm] = useState<UsuarioFormData>(initialFormState)
 
-  const [form, setForm] = useState<UsuarioFormData>({
-    nombreCompleto: usuario?.nombreCompleto ?? '',
-    alias: usuario?.alias,
-    apellidoSoltera: usuario?.apellidoSoltera,
-    telefono: usuario?.telefono,
-    biografia: usuario?.biografia,
-    fotoPerfil: usuario?.fotoPerfil,
-    fotoPortada: usuario?.fotoPortada,
-    ubicacion: usuario?.ubicacion ?? { ciudad: '', provincia: '', pais: '' },
-    estadoCivil: usuario?.estadoCivil,
-    profesion: usuario?.profesion,
-    hobbies: usuario?.hobbies ?? [],
-    musicaFavorita: usuario?.musicaFavorita,
-    fraseEmblema: usuario?.fraseEmblema,
-    privacidad: usuario?.privacidad,
-  })
+  useEffect(() => {
+    if (!usuario) return
+
+    setForm({
+      nombreCompleto: usuario.nombreCompleto ?? '',
+      alias: usuario.alias,
+      apellidoSoltera: usuario.apellidoSoltera,
+      telefono: usuario.telefono,
+      biografia: usuario.biografia,
+      fotoPerfil: usuario.fotoPerfil,
+      fotoPortada: usuario.fotoPortada,
+      ubicacion: {
+        ciudad: usuario.ubicacion?.ciudad ?? '',
+        provincia: usuario.ubicacion?.provincia ?? '',
+        pais: usuario.ubicacion?.pais ?? '',
+      },
+      estadoCivil: usuario.estadoCivil ?? 'no especifica',
+      profesion: usuario.profesion,
+      hobbies: usuario.hobbies ?? [],
+      musicaFavorita: usuario.musicaFavorita,
+      fraseEmblema: usuario.fraseEmblema,
+      privacidad: usuario.privacidad ?? 'solo_companieros',
+    })
+    setHobbiesText(usuario.hobbies?.join(', ') ?? '')
+  }, [usuario])
+
+  if (!usuario) {
+    return <div className="rounded-xl bg-white p-6 shadow-[var(--shadow-card)] text-sm text-slate-600">Cargando datos de perfil...</div>
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
