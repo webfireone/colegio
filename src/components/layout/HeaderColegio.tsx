@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store/authStore'
 import { useUIStore } from '../../store/uiStore'
 import { useNotificacionStore } from '../../store/notificacionStore'
+import logoInmaculada from '../../../logo/logo.jpg'
 
 const navItems = [
   { to: '/', icon: '🏠', label: 'Inicio' },
@@ -56,9 +57,11 @@ export function HeaderColegio() {
             className="flex items-center gap-2 cursor-pointer shrink-0"
             onClick={() => navigate('/')}
           >
-            <div className="w-8 h-8 rounded-lg gradient-institucional flex items-center justify-center text-white text-xs font-bold shadow-glow">
-              IC
-            </div>
+            <img
+              src={logoInmaculada}
+              alt="Inmaculada logo"
+              className="w-10 h-10 rounded-lg object-cover shadow-sm border border-white/10"
+            />
             <div className="hidden sm:block">
               <p className="text-xs font-heading font-bold gradient-text-institucional leading-tight">
                 Inmaculada
