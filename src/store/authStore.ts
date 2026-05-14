@@ -13,6 +13,7 @@ interface AuthState {
   debeCambiarClave: boolean
   cargando: boolean
   error: string | null
+  usuariosConClaveCambiada: Record<string, boolean>
   login: (email: string, password: string) => Promise<void>
   loginConNombre: (nombre: string) => Promise<void>
   registro: (data: UsuarioFormData & { email: string; password: string }) => Promise<void>
@@ -76,6 +77,7 @@ export const useAuthStore = create<AuthState>()(
       debeCambiarClave: false,
       cargando: false,
       error: null,
+      usuariosConClaveCambiada: {},
 
       login: async (email: string, password: string) => {
         set({ cargando: true, error: null })
@@ -101,7 +103,7 @@ export const useAuthStore = create<AuthState>()(
               if (!userData) throw new Error('Usuario no registrado en la base de datos')
               usuario = crearUsuarioMock(nombreLower, userData)
               usuario.id = firebaseUid
-              await setDoc(doc(db, 'usuarios', firebaseUid), usuario)
+              await setDoc(doc(db, 'usuarios', firebaseUid), { ...usuario, debeCambiarClave: true })
             }
           } catch (fbErr: any) {
             // Firebase falló → fallback a mock
@@ -121,6 +123,10 @@ export const useAuthStore = create<AuthState>()(
             usuario = crearUsuarioMock(nombreLower, userData)
           }
 
+          const cambiosPrevios = get().usuariosConClaveCambiada
+          if (usuario.email && cambiosPrevios[usuario.email]) {
+            claveDebeCambiar = false
+          }
           set({
             usuario,
             estaAutenticado: true,
@@ -184,12 +190,21 @@ export const useAuthStore = create<AuthState>()(
             // Actualizar Firestore: quitar flag debeCambiarClave
             const ref = doc(db, 'usuarios', user.uid)
             await setDoc(ref, { debeCambiarClave: false }, { merge: true })
+          } else {
+            const email = get().usuario?.email
+            if (email) {
+              const cambiosPrevios = get().usuariosConClaveCambiada
+              set({ usuariosConClaveCambiada: { ...cambiosPrevios, [email]: true } })
+            }
           }
-          // Mock: solo esperar
           await new Promise((r) => setTimeout(r, 500))
           set({ debeCambiarClave: false, cargando: false })
         } catch {
-          // Fallback mock
+          const email = get().usuario?.email
+          if (email) {
+            const cambiosPrevios = get().usuariosConClaveCambiada
+            set({ usuariosConClaveCambiada: { ...cambiosPrevios, [email]: true } })
+          }
           await new Promise((r) => setTimeout(r, 500))
           set({ debeCambiarClave: false, cargando: false })
         }
@@ -218,6 +233,7 @@ export const useAuthStore = create<AuthState>()(
         usuario: state.usuario,
         estaAutenticado: state.estaAutenticado,
         debeCambiarClave: state.debeCambiarClave,
+        usuariosConClaveCambiada: state.usuariosConClaveCambiada,
       }),
     }
   )

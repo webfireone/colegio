@@ -125,7 +125,13 @@ export function LoginPage() {
             Clave: tu nombre en minúsculas
           </p>
 
-          <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
+          <div className="mt-4 grid gap-2">
+            <button
+              onClick={() => navigate('/login/form')}
+              className="w-full py-3 rounded-lg bg-white/10 text-sm text-white font-medium hover:bg-white/15 transition-all"
+            >
+              Ingresar con email y contraseña
+            </button>
             <button
               onClick={() => navigate('/registro')}
               className="w-full text-sm text-[var(--color-celeste)] font-medium hover:text-white transition-colors text-center block"
