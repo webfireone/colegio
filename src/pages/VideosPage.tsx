@@ -6,26 +6,37 @@ export function VideosPage() {
   const [vista, setVista] = useState<'cortos' | 'largos'>('cortos')
 
   return (
-    <div className="space-y-4">
-      <div className="flex gap-2">
+    <div className="space-y-5">
+      <div className="flex gap-3 p-1 glass-deep rounded-xl" role="tablist">
         <button
+          role="tab"
+          aria-selected={vista === 'cortos'}
           onClick={() => setVista('cortos')}
-          className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
-            vista === 'cortos' ? 'bg-[var(--color-tiktok)] text-white' : 'bg-white text-[var(--color-texto)]'
+          className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ${
+            vista === 'cortos'
+              ? 'gradient-institucional text-white shadow-glow'
+              : 'text-white/50 hover:text-white/80 hover:bg-white/5'
           }`}
         >
-          🎬 Videos Cortos
+          🎬 Cortos
         </button>
         <button
+          role="tab"
+          aria-selected={vista === 'largos'}
           onClick={() => setVista('largos')}
-          className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
-            vista === 'largos' ? 'bg-[var(--color-youtube)] text-white' : 'bg-white text-[var(--color-texto)]'
+          className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ${
+            vista === 'largos'
+              ? 'gradient-institucional text-white shadow-glow'
+              : 'text-white/50 hover:text-white/80 hover:bg-white/5'
           }`}
         >
           📺 Videoteca
         </button>
       </div>
-      {vista === 'cortos' ? <ReelsFeed /> : <Videoteca />}
+
+      <div className="animate-fade-in" key={vista}>
+        {vista === 'cortos' ? <ReelsFeed /> : <Videoteca />}
+      </div>
     </div>
   )
 }
