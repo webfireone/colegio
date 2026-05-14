@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
+import { getFotoPerfil } from '../utils/fotos'
 
 export function CambiarClavePage() {
   const navigate = useNavigate()
@@ -27,15 +28,25 @@ export function CambiarClavePage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-[var(--color-institucional)] to-[var(--color-celeste)] flex items-center justify-center p-4 overflow-hidden">
+    <div className="relative min-h-screen bg-[#080b14] flex items-center justify-center p-4 overflow-hidden">
       <div className="deco-orb w-80 h-80 -top-16 -left-16 animate-levitate" />
       <div className="deco-orb w-56 h-56 -bottom-8 -right-8 animate-float-reverse" style={{ background: 'radial-gradient(circle at center, rgba(212,175,55,0.06), transparent 70%)' }} />
       <div className="deco-ring w-[450px] h-[450px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-float" />
       <div className="w-full max-w-md relative z-10">
-        <div className="glass-card rounded-2xl p-8">
+        <div className="glass-deep rounded-2xl p-8">
           <div className="text-center mb-6">
-            <div className="w-16 h-16 rounded-full gradient-dorado flex items-center justify-center mx-auto mb-3 shadow-glow-dorado animate-float">
-              <span className="text-2xl">🔑</span>
+            <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-3 border-2 border-[var(--color-celeste)]/30 ring-2 ring-[var(--color-dorado)]/20 shadow-glow">
+              {usuario?.nombreCompleto ? (
+                <img
+                  src={getFotoPerfil(usuario.nombreCompleto)}
+                  alt={usuario.nombreCompleto}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full gradient-institucional flex items-center justify-center">
+                  <span className="text-white text-xl font-bold">?</span>
+                </div>
+              )}
             </div>
             <h1 className="text-xl font-bold gradient-text-institucional">
               Bienvenido, {usuario?.nombreCompleto}
@@ -48,7 +59,7 @@ export function CambiarClavePage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="nueva-clave" className="block text-sm font-medium mb-1">
+              <label htmlFor="nueva-clave" className="block text-sm font-medium text-[var(--color-texto)] mb-1">
                 Nueva contraseña
               </label>
               <input
@@ -56,7 +67,7 @@ export function CambiarClavePage() {
                 type="password"
                 value={nuevaClave}
                 onChange={(e) => setNuevaClave(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)] transition-all duration-300"
+                className="w-full px-4 py-3 rounded-lg bg-[var(--color-surface)] text-white border border-[var(--color-border)] text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)] transition-all duration-300 placeholder:text-[var(--color-texto-terciario)]"
                 placeholder="Mínimo 6 caracteres"
                 required
                 minLength={6}
@@ -64,7 +75,7 @@ export function CambiarClavePage() {
               />
             </div>
             <div>
-              <label htmlFor="confirmar-clave" className="block text-sm font-medium mb-1">
+              <label htmlFor="confirmar-clave" className="block text-sm font-medium text-[var(--color-texto)] mb-1">
                 Confirmar nueva contraseña
               </label>
               <input
@@ -72,7 +83,7 @@ export function CambiarClavePage() {
                 type="password"
                 value={confirmarClave}
                 onChange={(e) => setConfirmarClave(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)] transition-all duration-300"
+                className="w-full px-4 py-3 rounded-lg bg-[var(--color-surface)] text-white border border-[var(--color-border)] text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)] transition-all duration-300 placeholder:text-[var(--color-texto-terciario)]"
                 placeholder="Repetí la contraseña"
                 required
                 minLength={6}
@@ -80,7 +91,7 @@ export function CambiarClavePage() {
             </div>
 
             {error && (
-              <div className="p-3 rounded-lg bg-red-50 text-[var(--color-error)] text-sm animate-fade-in" role="alert">
+              <div className="p-3 rounded-lg bg-[var(--color-error)]/10 text-[var(--color-error)] text-sm border border-[var(--color-error)]/20 animate-fade-in" role="alert">
                 {error}
               </div>
             )}
