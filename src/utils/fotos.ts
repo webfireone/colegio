@@ -15,16 +15,18 @@ const FOTOS_REALES: Record<string, string> = {
 
 const FOTOS_GRUPO = [
   '/fotos/todos.jpg',
-  '/fotos/TODOS FULL.png',
-  '/fotos/TODOS PLAYA.png',
+  '/fotos/todos.png',
   '/fotos/todos1.jpg',
   '/fotos/todos3.jpg',
-  '/fotos/todos.png',
+  '/fotos/TODOS FULL.png',
+  '/fotos/TODOS PLAYA.png',
   '/fotos/811.jpg',
   '/fotos/c1.jpg',
   '/fotos/las 2.jpg',
   '/fotos/las 3.jpg',
   '/fotos/las 4.jpg',
+  '/fotos/las 4.1 - copia.jpg',
+  '/fotos/las 4.3.jpg',
   '/fotos/las 6.jpg',
   '/fotos/LAS 7.png',
   '/fotos/LAS 8.jpg',
@@ -34,6 +36,16 @@ const FOTOS_GRUPO = [
   '/fotos/MIERCOLES 00.jpg',
   '/fotos/YO Y MICK.jpg',
   '/fotos/6c828ceefb6842e59af1c551c629b7fd.jpg',
+  '/fotos/besito.avif',
+  '/fotos/TRAPA.png',
+  '/fotos/YUYO.png',
+  '/fotos/RICHARD.png',
+  '/fotos/Gemini_Generated_Image_6ollwz6ollwz6oll.png',
+  '/fotos/Gemini_Generated_Image_dn69lkdn69lkdn69.png',
+  '/fotos/Gemini_Generated_Image_ermkk4ermkk4ermk.png',
+  '/fotos/Gemini_Generated_Image_ic5vudic5vudic5v.png',
+  '/fotos/Gemini_Generated_Image_tuwjdmtuwjdmtuwj.png',
+  '/fotos/Gemini_Generated_Image_xrti3dxrti3dxrti.png',
 ]
 
 const VIDEOS_REALES: Record<string, string> = {
