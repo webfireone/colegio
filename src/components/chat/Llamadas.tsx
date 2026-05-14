@@ -12,7 +12,7 @@ export function Llamadas() {
   }))
 
   return (
-    <div className="bg-white rounded-xl shadow-[var(--shadow-card)] overflow-hidden">
+    <div className="bg-[var(--color-surface)] rounded-xl shadow-[var(--shadow-card)] overflow-hidden">
       {enLlamada ? (
         <div className="p-8 text-center space-y-4">
           <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[var(--color-institucional)] to-[var(--color-celeste)] mx-auto flex items-center justify-center">
@@ -28,8 +28,8 @@ export function Llamadas() {
           </button>
         </div>
       ) : (
-        <div className="divide-y divide-[var(--color-crema)]">
-          <div className="flex gap-2 p-3 border-b border-[var(--color-crema)]">
+        <div className="divide-y divide-[var(--color-border)]">
+          <div className="flex gap-2 p-3 border-b border-[var(--color-border)]">
             <button
               onClick={() => setEnLlamada(true)}
               className="flex-1 py-2 rounded-lg bg-[var(--color-exito)] text-white text-sm font-semibold hover:bg-green-700 transition-colors"

@@ -47,7 +47,7 @@ export function PublicacionCard({ publicacion }: PubCardProps) {
     <article className="glass-card rounded-xl overflow-hidden hover-lift">
       <div className="p-4">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[var(--color-crema)] flex-shrink-0">
+          <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[var(--color-border)] flex-shrink-0">
             {publicacion.autorFoto ? (
               <img src={publicacion.autorFoto} alt={publicacion.autorNombre} className="w-full h-full object-cover" />
             ) : (
@@ -121,7 +121,7 @@ export function PublicacionCard({ publicacion }: PubCardProps) {
           </div>
         )}
 
-        <div className="border-t border-[var(--color-crema)] pt-3 space-y-3">
+        <div className="border-t border-[var(--color-border)] pt-3 space-y-3">
           <Reacciones
             reacciones={publicacion.reacciones}
             onReaccionar={handleReaccionar}

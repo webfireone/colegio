@@ -11,9 +11,9 @@ export function ConfiguracionPage() {
 
   return (
     <div className="space-y-4">
-      <h2 className="text-lg font-bold text-[var(--color-institucional)]">Configuración</h2>
+      <h2 className="text-lg font-bold text-white">Configuración</h2>
 
-      <div className="bg-white rounded-xl p-4 shadow-[var(--shadow-card)] space-y-4">
+      <div className="bg-[var(--color-surface)] rounded-xl p-4 shadow-[var(--shadow-card)] space-y-4">
         <h3 className="font-semibold text-sm">Accesibilidad</h3>
 
         <div className="flex items-center justify-between">
@@ -53,13 +53,13 @@ export function ConfiguracionPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl p-4 shadow-[var(--shadow-card)]">
+      <div className="bg-[var(--color-surface)] rounded-xl p-4 shadow-[var(--shadow-card)]">
         <h3 className="font-semibold text-sm mb-3">Cuenta</h3>
         <div className="space-y-2">
-          <button className="w-full text-left p-3 rounded-lg hover:bg-[var(--color-crema)] text-sm transition-colors">
+          <button className="w-full text-left p-3 rounded-lg hover:bg-[var(--color-surface-hover)] text-sm transition-colors">
             🔒 Cambiar contraseña
           </button>
-          <button className="w-full text-left p-3 rounded-lg hover:bg-[var(--color-crema)] text-sm transition-colors">
+          <button className="w-full text-left p-3 rounded-lg hover:bg-[var(--color-surface-hover)] text-sm transition-colors">
             📥 Descargar mis datos
           </button>
           <button
@@ -71,7 +71,7 @@ export function ConfiguracionPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-xl p-4 shadow-[var(--shadow-card)]">
+      <div className="bg-[var(--color-surface)] rounded-xl p-4 shadow-[var(--shadow-card)]">
         <h3 className="font-semibold text-sm mb-3">Acerca de</h3>
         <div className="space-y-1 text-sm text-[var(--color-texto-secundario)]">
           <p>Instituto Inmaculada Concepción</p>
@@ -82,7 +82,7 @@ export function ConfiguracionPage() {
 
       {confirmarSalir && (
         <div className="fixed inset-0 z-[300] bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl p-6 max-w-sm w-full shadow-xl">
+          <div className="bg-[var(--color-surface)] rounded-xl p-6 max-w-sm w-full shadow-xl">
             <h3 className="font-semibold mb-2">¿Cerrar sesión?</h3>
             <p className="text-sm text-[var(--color-texto-secundario)] mb-4">
               Puedes volver a ingresar cuando quieras.

@@ -8,7 +8,7 @@ export function CentroNotificaciones() {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-bold text-[var(--color-institucional)]">
+        <h2 className="text-lg font-bold text-white">
           Notificaciones
           {noLeidas > 0 && (
             <span className="ml-2 px-2 py-0.5 rounded-full bg-[var(--color-error)] text-white text-xs">
@@ -26,7 +26,7 @@ export function CentroNotificaciones() {
         )}
       </div>
 
-      <div className="divide-y divide-[var(--color-crema)] bg-white rounded-xl shadow-[var(--shadow-card)] overflow-hidden">
+      <div className="divide-y divide-[var(--color-border)] bg-[var(--color-surface)] rounded-xl shadow-[var(--shadow-card)] overflow-hidden">
         {notificaciones.length === 0 ? (
           <p className="p-6 text-sm text-center text-[var(--color-texto-secundario)]">
             No tienes notificaciones
@@ -38,8 +38,8 @@ export function CentroNotificaciones() {
               <button
                 key={n.id}
                 onClick={() => marcarLeida(n.id)}
-                className={`w-full text-left p-4 flex items-start gap-3 hover:bg-[var(--color-crema)] transition-colors ${
-                  !n.leida ? 'bg-[var(--color-crema)]' : ''
+                className={`w-full text-left p-4 flex items-start gap-3 hover:bg-[var(--color-surface-hover)] transition-colors ${
+                  !n.leida ? 'bg-[var(--color-surface)]' : ''
                 }`}
               >
                 <div className="relative">

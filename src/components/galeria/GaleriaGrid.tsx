@@ -20,7 +20,7 @@ export function GaleriaGrid() {
         {fotosMock.map((foto) => (
           <button
             key={foto.id}
-            className="aspect-square overflow-hidden rounded-lg bg-[var(--color-crema)] group relative hover:ring-2 hover:ring-[var(--color-celeste)] transition-all"
+            className="aspect-square overflow-hidden rounded-lg bg-[var(--color-surface)] group relative hover:ring-2 hover:ring-[var(--color-celeste)] transition-all"
             aria-label={`Foto de ${foto.autor}`}
           >
             <img src={foto.url} alt="" className="w-full h-full object-cover" loading="lazy" />

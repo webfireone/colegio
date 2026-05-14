@@ -10,7 +10,7 @@ const navItems = [
 
 export function BottomBar() {
   return (
-    <nav className="bottom-bar fixed bottom-0 left-0 right-0 bg-white border-t border-[var(--color-crema)] z-30 flex md:hidden safe-area-pb">
+    <nav className="bottom-bar fixed bottom-0 left-0 right-0 bg-[var(--color-surface)] border-t border-[var(--color-border)] z-30 flex md:hidden safe-area-pb">
       {navItems.map((item) => (
         <NavLink
           key={item.to}

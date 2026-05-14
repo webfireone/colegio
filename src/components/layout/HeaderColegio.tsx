@@ -78,7 +78,7 @@ export function HeaderColegio() {
                   `flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-300 whitespace-nowrap ${
                     isActive
                       ? 'gradient-institucional text-white shadow-sm'
-                      : 'text-[var(--color-texto-secundario)] hover:text-[var(--color-institucional)] hover:bg-white/60'
+                      : 'text-[var(--color-texto-secundario)] hover:text-white hover:bg-[var(--color-surface-hover)]'
                   }`
                 }
               >
@@ -99,7 +99,7 @@ export function HeaderColegio() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Buscar..."
-                  className="w-36 lg:w-48 pl-7 pr-3 py-1.5 rounded-full bg-[var(--color-crema)] text-xs text-[var(--color-texto)] border-none focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)] placeholder:text-[var(--color-texto-secundario)]"
+                  className="w-36 lg:w-48 pl-7 pr-3 py-1.5 rounded-full bg-[var(--color-surface)] text-xs text-white border-none focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)] placeholder:text-[var(--color-texto-secundario)]"
                   aria-label="Buscar"
                 />
               </div>
@@ -108,7 +108,7 @@ export function HeaderColegio() {
             {/* Notifications */}
             <button
               onClick={() => navigate('/notificaciones')}
-              className="relative p-1.5 text-sm text-[var(--color-texto-secundario)] hover:text-[var(--color-institucional)] transition-colors"
+              className="relative p-1.5 text-sm text-[var(--color-texto-secundario)] hover:text-white transition-colors"
               aria-label="Notificaciones"
             >
               🔔
@@ -122,7 +122,7 @@ export function HeaderColegio() {
             {/* Font size */}
             <button
               onClick={toggleFontSize}
-              className="p-1.5 text-xs text-[var(--color-texto-secundario)] hover:text-[var(--color-institucional)] transition-colors font-bold"
+              className="p-1.5 text-xs text-[var(--color-texto-secundario)] hover:text-white transition-colors font-bold"
               aria-label="Cambiar tamaño de letra"
             >
               A<span className="text-[9px]">A</span>
@@ -131,7 +131,7 @@ export function HeaderColegio() {
             {/* High contrast */}
             <button
               onClick={toggleHighContrast}
-              className="p-1.5 text-xs text-[var(--color-texto-secundario)] hover:text-[var(--color-institucional)] transition-colors"
+              className="p-1.5 text-xs text-[var(--color-texto-secundario)] hover:text-white transition-colors"
               aria-label="Alto contraste"
             >
               ◐
@@ -177,7 +177,7 @@ export function HeaderColegio() {
                   `flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium rounded-lg whitespace-nowrap transition-all duration-200 shrink-0 ${
                     isActive
                       ? 'gradient-institucional text-white'
-                      : 'text-[var(--color-texto-secundario)] hover:text-[var(--color-institucional)]'
+                      : 'text-[var(--color-texto-secundario)] hover:text-white'
                   }`
                 }
               >
@@ -195,7 +195,7 @@ export function HeaderColegio() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Buscar compañeros, fotos, recuerdos..."
-                  className="w-full pl-7 pr-3 py-1.5 rounded-full bg-[var(--color-crema)] text-xs text-[var(--color-texto)] border-none focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
+                  className="w-full pl-7 pr-3 py-1.5 rounded-full bg-[var(--color-surface)] text-xs text-white border-none focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
                   aria-label="Buscar"
                 />
               </div>

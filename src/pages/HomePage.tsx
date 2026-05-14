@@ -288,7 +288,7 @@ export function HomePage() {
                         {ev.menuEspecial.map((dieta) => (
                           <span
                             key={dieta}
-                            className="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-crema-dark)] text-[var(--color-texto-secundario)] font-medium"
+                            className="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-surface)] text-[var(--color-texto-secundario)] font-medium"
                           >
                             {dieta === 'celiaco' ? '🥜 Sin gluten' : '🥬 Opción veggie'}
                           </span>
@@ -305,7 +305,7 @@ export function HomePage() {
                     <span className="text-sm text-[var(--color-texto-secundario)]">{ev.confirmados + ev.pendientes}</span>
                   </div>
                   <p className="text-[10px] text-[var(--color-texto-secundario)] mt-0.5">confirmados</p>
-                  <div className="w-full h-1.5 rounded-full bg-[var(--color-crema)] mt-2 overflow-hidden">
+                  <div className="w-full h-1.5 rounded-full bg-[var(--color-surface)] mt-2 overflow-hidden">
                     <div
                       className="h-full rounded-full gradient-institucional transition-all duration-500"
                       style={{ width: `${(ev.confirmados / (ev.confirmados + ev.pendientes)) * 100}%` }}

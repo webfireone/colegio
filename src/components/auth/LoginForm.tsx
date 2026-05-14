@@ -44,7 +44,7 @@ export function LoginForm() {
                   key={key}
                   onClick={() => handleClickUsuario(key)}
                   disabled={cargando}
-                  className="flex items-center gap-2 p-3 rounded-lg bg-[var(--color-crema)] hover:bg-[var(--color-celeste)]/10 hover:border-[var(--color-celeste)] border border-transparent transition-all text-left"
+                  className="flex items-center gap-2 p-3 rounded-lg bg-[var(--color-surface)] hover:bg-[var(--color-celeste)]/10 hover:border-[var(--color-celeste)] border border-transparent transition-all text-left"
                 >
                   <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-[var(--color-institucional)] to-[var(--color-celeste)]">
                     <img

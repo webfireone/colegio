@@ -28,7 +28,7 @@ export function PreguntaSeguridad({ onCompletado, onError }: PreguntaSeguridadPr
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="bg-[var(--color-crema)] rounded-lg p-4">
+      <div className="bg-[var(--color-surface)] rounded-lg p-4">
         <p className="text-sm font-medium mb-1">Verificación de seguridad</p>
         <p className="text-base">{pregunta}</p>
       </div>

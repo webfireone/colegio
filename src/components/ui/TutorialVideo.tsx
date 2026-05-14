@@ -9,7 +9,7 @@ interface TutorialProps {
 export function TutorialVideo({ titulo, descripcion, pasos, onCerrar }: TutorialProps) {
   return (
     <div className="space-y-4">
-      <div className="bg-[var(--color-crema)] rounded-lg p-4">
+      <div className="bg-[var(--color-surface)] rounded-lg p-4">
         <p className="text-sm text-[var(--color-texto-secundario)] mb-2">{descripcion}</p>
         <div className="aspect-video bg-[var(--color-institucional)]/10 rounded-lg flex items-center justify-center">
           <span className="text-4xl">🎬</span>

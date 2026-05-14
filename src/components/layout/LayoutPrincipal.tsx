@@ -17,7 +17,7 @@ export function LayoutPrincipal() {
   }
 
   return (
-    <div className="relative min-h-screen bg-[var(--color-crema)] hero-grid">
+    <div className="relative min-h-screen">
       <HeaderColegio />
       <BottomBar />
 

@@ -35,7 +35,7 @@ export function Comentarios({ comentarios, onComentar }: ComentariosProps) {
 
       {visibles.map((c) => (
         <div key={c.id} className="flex gap-2">
-          <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-[var(--color-crema)]">
+          <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-[var(--color-surface)]">
             {c.autorFoto ? (
               <img src={c.autorFoto} alt="" className="w-full h-full object-cover" />
             ) : (
@@ -45,7 +45,7 @@ export function Comentarios({ comentarios, onComentar }: ComentariosProps) {
             )}
           </div>
           <div className="flex-1 min-w-0">
-            <div className="bg-[var(--color-crema)] rounded-lg px-3 py-2">
+            <div className="bg-[var(--color-surface)] rounded-lg px-3 py-2">
               <p className="font-semibold text-sm">{c.autorNombre}</p>
               <p className="text-sm text-[var(--color-texto)]">{c.texto}</p>
               {c.imagen && (
@@ -65,7 +65,7 @@ export function Comentarios({ comentarios, onComentar }: ComentariosProps) {
           value={nuevoComentario}
           onChange={(e) => setNuevoComentario(e.target.value)}
           placeholder="Escribe un comentario..."
-          className="flex-1 px-3 py-2 rounded-full bg-[var(--color-crema)] text-sm border-none focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
+          className="flex-1 px-3 py-2 rounded-full bg-[var(--color-surface)] text-sm border-none focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
           aria-label="Nuevo comentario"
         />
         <button

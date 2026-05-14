@@ -89,3 +89,6 @@ scripts/
 - Preferir `use<StoreName>Store((s) => s.prop)` sobre desestructuración directa
 - No comentarios en código a menos que sea estrictamente necesario
 - Mock data en stores (feedStore, chatStore, perfilStore) y authStore
+- Fotos reales en `public/fotos/` (11 miembros). Usar `getFotoPerfil(nombre)` de `src/utils/fotos.ts` (fallback a dicebear si no hay foto real)
+- Fotos de grupo en `getFotoGrupo()` (selecciona aleatoriamente de ~20 fotos reales del grupo)
+- Videos reales en `getVideoPerfil(nombre)` (solo Cristian tiene video: cris_generated.mp4)

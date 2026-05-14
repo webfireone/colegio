@@ -57,7 +57,7 @@ export function Widgets() {
         </div>
         <div className="space-y-2">
           {USUARIOS.slice(0, 4).map((u, i) => (
-            <div key={u.id} className="flex items-center gap-2 text-sm p-2 rounded-lg hover:bg-[var(--color-crema)] transition-colors">
+            <div key={u.id} className="flex items-center gap-2 text-sm p-2 rounded-lg hover:bg-[var(--color-surface-hover)] transition-colors">
               <span>🎂</span>
               <div>
                 <p className="font-medium text-sm">{u.nombre}</p>
@@ -75,7 +75,7 @@ export function Widgets() {
         </div>
         <div className="space-y-2">
           {USUARIOS.slice(0, 5).map((u) => (
-            <div key={u.id} className="flex items-center gap-2 text-sm p-1.5 rounded-lg hover:bg-[var(--color-crema)] transition-colors">
+            <div key={u.id} className="flex items-center gap-2 text-sm p-1.5 rounded-lg hover:bg-[var(--color-surface-hover)] transition-colors">
               <span className="w-2 h-2 rounded-full bg-[var(--color-exito)] animate-pulse-glow" />
               <span>{u.nombre}</span>
             </div>
@@ -88,7 +88,7 @@ export function Widgets() {
         <h3 className="font-semibold text-sm gradient-text-institucional mb-2">Plataformas</h3>
         <div className="grid grid-cols-5 gap-2">
           {Object.entries(PLATAFORMA_INFO).map(([key, info]) => (
-            <div key={key} className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-[var(--color-crema)] transition-colors hover-lift">
+            <div key={key} className="flex flex-col items-center gap-1 p-2 rounded-lg hover:bg-[var(--color-surface-hover)] transition-colors hover-lift">
               <span className="text-xl">{info.icono}</span>
               <span className="text-[10px] text-[var(--color-texto-secundario)]">{info.nombre}</span>
             </div>

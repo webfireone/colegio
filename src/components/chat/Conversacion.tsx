@@ -6,7 +6,7 @@ export function Conversacion() {
   const { mensajes, conversacionActiva, enviarMensaje, cargarMensajes } = useChat()
 
   return (
-    <div className="bg-white rounded-xl shadow-[var(--shadow-card)] overflow-hidden flex flex-col h-full">
+    <div className="bg-[var(--color-surface)] rounded-xl shadow-[var(--shadow-card)] overflow-hidden flex flex-col h-full">
       {!conversacionActiva ? (
         <div className="flex-1 flex items-center justify-center text-sm text-[var(--color-texto-secundario)] p-8">
           Selecciona una conversación para empezar
@@ -26,7 +26,7 @@ export function Conversacion() {
                     className={`max-w-[80%] px-3 py-2 rounded-lg text-sm ${
                       msg.emisorId === 'user-1'
                         ? 'bg-[var(--color-whatsapp)] text-white rounded-br-sm'
-                        : 'bg-[var(--color-crema)] text-[var(--color-texto)] rounded-bl-sm'
+                        : 'bg-[var(--color-surface)] text-[var(--color-texto)] rounded-bl-sm'
                     }`}
                   >
                     {msg.tipo === 'audio' ? (
@@ -76,7 +76,7 @@ function ChatInput({ onSend }: { onSend: (texto: string) => void }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-2 p-3 border-t border-[var(--color-crema)]">
+    <form onSubmit={handleSubmit} className="flex items-center gap-2 p-3 border-t border-[var(--color-border)]">
       <button type="button" className="touch-target text-xl text-[var(--color-texto-secundario)]" aria-label="Adjuntar">
         📎
       </button>
@@ -88,7 +88,7 @@ function ChatInput({ onSend }: { onSend: (texto: string) => void }) {
         value={texto}
         onChange={(e) => setTexto(e.target.value)}
         placeholder="Escribe un mensaje..."
-        className="flex-1 px-4 py-2.5 rounded-full bg-[var(--color-crema)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
+        className="flex-1 px-4 py-2.5 rounded-full bg-[var(--color-surface)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-celeste)]"
         aria-label="Mensaje"
       />
       <button

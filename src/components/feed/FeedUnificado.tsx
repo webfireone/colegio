@@ -22,7 +22,7 @@ export function FeedUnificado() {
           className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
             !filtroPlataforma
               ? 'bg-[var(--color-institucional)] text-white'
-              : 'bg-white text-[var(--color-texto)] hover:bg-[var(--color-crema)]'
+              : 'bg-[var(--color-surface)] text-[var(--color-texto)] hover:bg-[var(--color-surface-hover)]'
           }`}
         >
           🏠 Para ti
@@ -34,7 +34,7 @@ export function FeedUnificado() {
             className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
               filtroPlataforma === key
                 ? 'bg-[var(--color-institucional)] text-white'
-                : 'bg-white text-[var(--color-texto)] hover:bg-[var(--color-crema)]'
+                : 'bg-[var(--color-surface)] text-[var(--color-texto)] hover:bg-[var(--color-surface-hover)]'
             }`}
             style={filtroPlataforma === key ? { backgroundColor: info.color } : {}}
           >
