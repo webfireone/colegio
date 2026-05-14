@@ -1,0 +1,105 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function estaAutenticado() {
+      return request.auth != null;
+    }
+
+    function esPropietario(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function esUsuarioVerificado() {
+      return exists(/databases/$(database)/documents/usuarios/$(request.auth.uid));
+    }
+
+    function esModerador() {
+      return get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.rol == 'moderador'
+        || get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.rol == 'admin';
+    }
+
+    function visibilidadPermitida(visibilidad, propietarioId) {
+      return visibilidad == 'publico_interno'
+        || (visibilidad == 'solo_companieros' && esUsuarioVerificado())
+        || (visibilidad == 'grupo_curso' && get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.anioEgreso == 1986)
+        || esPropietario(propietarioId);
+    }
+
+    match /usuarios/{userId} {
+      allow read: if estaAutenticado();
+      allow create: if estaAutenticado() && esPropietario(userId);
+      allow update: if estaAutenticado() && esPropietario(userId);
+      allow delete: if estaAutenticado() && esPropietario(userId);
+    }
+
+    match /publicaciones/{pubId} {
+      allow read: if estaAutenticado() && visibilidadPermitida(resource.data.visibilidad, resource.data.autorId);
+      allow create: if estaAutenticado();
+      allow update: if estaAutenticado() && esPropietario(resource.data.autorId);
+      allow delete: if estaAutenticado() && (esPropietario(resource.data.autorId) || esModerador());
+    }
+
+    match /publicaciones/{pubId}/comentarios/{comId} {
+      allow read: if estaAutenticado();
+      allow create: if estaAutenticado();
+      allow update: if estaAutenticado() && esPropietario(resource.data.autorId);
+      allow delete: if estaAutenticado() && (esPropietario(resource.data.autorId) || esModerador());
+    }
+
+    match /conversaciones/{convId} {
+      allow read: if estaAutenticado() && resource.data.participantes.hasAny([request.auth.uid]);
+      allow create: if estaAutenticado();
+      allow update: if estaAutenticado() && resource.data.participantes.hasAny([request.auth.uid]);
+      allow delete: if estaAutenticado() && resource.data.participantes.hasAny([request.auth.uid]);
+    }
+
+    match /conversaciones/{convId}/mensajes/{msgId} {
+      allow read: if estaAutenticado()
+        && get(/databases/$(database)/documents/conversaciones/$(convId)).data.participantes.hasAny([request.auth.uid]);
+      allow create: if estaAutenticado()
+        && get(/databases/$(database)/documents/conversaciones/$(convId)).data.participantes.hasAny([request.auth.uid]);
+      allow update: if estaAutenticado() && esPropietario(resource.data.emisorId);
+    }
+
+    match /grupos/{grupoId} {
+      allow read: if estaAutenticado();
+      allow create: if estaAutenticado();
+      allow update: if estaAutenticado() && resource.data.administradores.hasAny([request.auth.uid]);
+      allow delete: if estaAutenticado() && resource.data.administradores.hasAny([request.auth.uid]);
+    }
+
+    match /eventos/{eventoId} {
+      allow read: if estaAutenticado();
+      allow create: if estaAutenticado();
+      allow update: if estaAutenticado() && esPropietario(resource.data.organizadorId);
+      allow delete: if estaAutenticado() && esPropietario(resource.data.organizadorId);
+    }
+
+    match /albumes/{albumId} {
+      allow read: if estaAutenticado() && visibilidadPermitida(resource.data.visibilidad, resource.data.propietarioId);
+      allow create: if estaAutenticado();
+      allow update: if estaAutenticado() && esPropietario(resource.data.propietarioId);
+      allow delete: if estaAutenticado() && esPropietario(resource.data.propietarioId);
+    }
+
+    match /videos/{videoId} {
+      allow read: if estaAutenticado();
+      allow create: if estaAutenticado();
+      allow update: if estaAutenticado() && esPropietario(resource.data.autorId);
+      allow delete: if estaAutenticado() && (esPropietario(resource.data.autorId) || esModerador());
+    }
+
+    match /notificaciones/{notifId} {
+      allow read: if estaAutenticado() && esPropietario(resource.data.usuarioId);
+      allow create: if estaAutenticado();
+      allow update: if estaAutenticado() && esPropietario(resource.data.usuarioId);
+      allow delete: if estaAutenticado() && esPropietario(resource.data.usuarioId);
+    }
+
+    match /{path=**}/reportes/{reporteId} {
+      allow read, write: if estaAutenticado()
+        && (esPropietario(resource.data.denuncianteId) || esModerador());
+    }
+  }
+}
